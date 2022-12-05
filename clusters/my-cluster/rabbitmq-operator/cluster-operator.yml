@@ -25,9 +25,3 @@ spec:
         kind: HelmRepository
         name: rabbitmq-repo
         namespace: flux-system
-  values:
-    msgTopologyOperator:
-      metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
