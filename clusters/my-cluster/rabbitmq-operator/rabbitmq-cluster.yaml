@@ -24,5 +24,3 @@ spec:
       collect_statistics_interval = 10000
       log.file.level = info
       prometheus.return_per_object_metrics = true
-  persistence:
-    storage: "100Mi"
