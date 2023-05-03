@@ -48,3 +48,8 @@ kubectl -n flux-system port-forward svc/weave-gitops 9001:9001
 login on http://localhost:9001
 
 use `admin:admin`
+
+6. Uninstall flux
+```
+flux uninstall
+```
