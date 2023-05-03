@@ -12,6 +12,6 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./clusters/ksemele-demo-gke/custom-resources/kafka-alerts
-  prune: false
+  prune: true
   wait: true
   timeout: 15m0s
