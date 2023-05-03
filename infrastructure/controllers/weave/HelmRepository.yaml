@@ -1,8 +1,10 @@
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: rabbitmq-repo
+  name: weave-gitops
   namespace: flux-system
 spec:
-  url: https://charts.bitnami.com/bitnami
-  interval: 10m
+  type: oci
+  interval: 120m
+  url: oci://ghcr.io/weaveworks/charts

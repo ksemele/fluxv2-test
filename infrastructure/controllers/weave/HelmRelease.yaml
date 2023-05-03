@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: weave-gitops
+  namespace: flux-system
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: weave-gitops
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: weave-gitops
+      interval: 5m
+  # https://github.com/weaveworks/weave-gitops/blob/main/charts/gitops-server/values.yaml
+  values:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 1
+        memory: 512Mi
+    adminUser:
+      create: true
+      username: admin
+      # Feel free to use gitops cli if you wish:
+      # https://docs.gitops.weave.works/docs/installation/weave-gitops/#install-the-gitops-cli
+      # PASSWORD="admin" ; echo -n $PASSWORD | gitops get bcrypt-hash
+      #
+      # More info about login:
+      # https://docs.gitops.weave.works/docs/configuration/securing-access-to-the-dashboard/#login-via-a-cluster-user-account
+      # bcrypt hash for admin's password "admin"
+      passwordHash: "$2a$10$ywtHh6AJ/VUr8lxOhByh8u4zldPVwYlgq9RkdM8joeB9g4UqN4Ina"

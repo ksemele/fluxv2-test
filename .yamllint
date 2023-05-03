@@ -1,0 +1,17 @@
+---
+extends: default
+
+rules:
+  # Don't check line length
+  line-length: disable
+
+  # accept both     key:
+  #                   - item
+  #
+  # and             key:
+  #                 - item
+  indentation:
+    indent-sequences: whatever
+
+ignore: |
+  .pre-commit-config.yaml

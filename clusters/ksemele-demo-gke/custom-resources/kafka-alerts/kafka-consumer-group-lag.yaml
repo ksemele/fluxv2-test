@@ -1,0 +1,23 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kafka-consumer-group-lag
+  namespace: monitoring
+  labels:
+    app: prometheus-operator
+    release: prometheus
+spec:
+  groups:
+  - name: kafka
+    rules:
+    - alert: ConsumerGroupLagKafka
+      expr: topk(25, kafka_consumergroup_group_lag{group=~"([\\D-]+)"}) > 50
+      for: 0m
+      labels:
+        severity: warning
+      annotations:
+        summary: |
+          Namespace `{{ $labels.namespace }}`
+          Kafka lag in consumer group `{{ $labels.group }}` for topic `{{ $labels.topic }}` in partition `{{ $labels.partition }}` exceeds 0 during the last 5 minutes.
+          Current value is `{{ $value | printf "%.0f" }}`.

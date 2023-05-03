@@ -1,0 +1,23 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kafka-vm-low-disk-space
+  namespace: monitoring
+  labels:
+    app: prometheus-operator
+    release: prometheus
+spec:
+  groups:
+    - name: Kafka
+      rules:
+        - alert: KafkaVmLowDiskSpace
+          expr: (100 - ((node_filesystem_avail_bytes{job=~"kafka-broker.*", mountpoint="/data/kafka"} * 100) / node_filesystem_size_bytes{job=~"kafka-broker.*", mountpoint="/data/kafka"})) > 80
+          for: 5m
+          labels:
+            severity: high
+          annotations:
+            description: |
+              Over the last 5 minutes disk utilization of mountpoint `{{ $labels.mountpoint }}` for `{{ $labels.job }}` in `{{ $labels.namespace }}` have hit `{{ $value | printf "%.0f" }}`%
+            summary: |
+              Check disk usage - https://link.to.grafana
