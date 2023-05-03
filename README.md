@@ -35,7 +35,14 @@ Optional: check installation after complete
 flux check
 ```
 
-4. apply flux resource to sync this repo and your cluster
+4. Apply flux resource to sync this repo and your cluster
 ```
 kubectl apply -f clusters/ksemele-demo-gke/sync-code/flux-system/gotk-sync.yaml
 ```
+
+5. Check Weave gitops
+forward port
+```
+kubectl -n flux-system port-forward svc/weave-gitops 9001:9001
+```
+login on http://localhost:9001

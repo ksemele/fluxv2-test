@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: weave-gitops
-      version: "*"
+      version: "0.22.x"
       sourceRef:
         kind: HelmRepository
         name: weave-gitops
@@ -33,4 +33,4 @@ spec:
       # More info about login:
       # https://docs.gitops.weave.works/docs/configuration/securing-access-to-the-dashboard/#login-via-a-cluster-user-account
       # bcrypt hash for admin's password "admin"
-      passwordHash: "$2a$10$ywtHh6AJ/VUr8lxOhByh8u4zldPVwYlgq9RkdM8joeB9g4UqN4Ina"
+      passwordHash: "$2a$10$5hM18uCQV202lnqi20unzeakIrvuSL8OHG44lx4CfE69oSZ1qDUCu"
