@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: weave-gitops
-      version: "0.22.*"
+      version: "*"
       sourceRef:
         kind: HelmRepository
         name: weave-gitops
