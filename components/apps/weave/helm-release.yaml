@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: weave-gitops
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: weave-gitops
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: weave-gitops
+        namespace: flux-system
+      interval: 5m0s
+  # https://github.com/weaveworks/weave-gitops/blob/main/charts/gitops-server/values.yaml
+  values:
+
+    ingress:
+      enabled: false
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        memory: 512Mi
+
+    adminUser:
+      create: true
+      username: admin
+      # Change password by generating a new hash with:
+      #   htpasswd -bnBC 8 "" your_password | grep -oP '\$2[ayb]\$.{56}'
+      #   to obtain htpasswd use "yum install httpd-tools"
+      #   or
+      #   https://docs.gitops.weave.works/docs/configuration/securing-access-to-the-dashboard/#login-via-a-cluster-user-account
+      # bcrypt hash for admin's password:
+      passwordHash: "$2y$08$kbjxHtKkw1YLVYvQIPomSOtQqwKvnSrD0ImcY0P26PGv8DnHEgqx6"
