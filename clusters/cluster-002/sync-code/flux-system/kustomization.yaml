@@ -5,4 +5,5 @@ resources:
   - ../../../../components/flux/prod/gotk-components.yaml
   # - cluster-variables.yaml  # I applied this configmap manually, in reality it should be genrated and apply by terraform
   - gotk-sync.yaml
+  - repos.yaml
   - weave.yaml
