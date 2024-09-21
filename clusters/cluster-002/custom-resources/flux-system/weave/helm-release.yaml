@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: weave-gitops
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      version: "*"
+  releaseName: weave-gitops
+  targetNamespace: flux-system
+  storageNamespace: flux-system
+  # values:
+  #   additionalArgs:
+  #     - --route-prefix=/flux
+  #   ingress:
+  #     enabled: true
+  #     className: internal
+  #     annotations: {}
+  #     hosts:
+  #       - host: cluster-002.fehu.dev
+  #         paths:
+  #           - path: /flux
+  #             pathType: ImplementationSpecific

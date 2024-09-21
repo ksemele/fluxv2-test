@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-from-prometheus-to-kube-dns
+  namespace: kube-system
+spec:
+  podSelector:
+    matchLabels:
+      k8s-app: kube-dns
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 9153  # core-dns
+        - protocol: TCP
+          port: 10055  # kube-dns
+        - protocol: TCP
+          port: 9253  # node-local-dns
+      from:
+        - namespaceSelector:
+            matchLabels:
+              k8s-namespace: monitoring
+  policyTypes:
+    - Ingress

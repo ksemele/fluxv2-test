@@ -1,0 +1,37 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-egress-from-all-to-gcp-metadata
+  namespace: <NAMESPACE>
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 443
+      to:
+        - ipBlock:
+            cidr: ${KUBE_API_IP_CIDR:=10.0.0.0/8}
+    - to:
+      - ipBlock:
+          cidr: 199.36.153.8/30
+      ports:
+      - protocol: TCP
+        port: 443
+    - to:
+      - ipBlock:
+          cidr: 169.254.169.254/32
+      ports:
+      - protocol: TCP
+        port: 80
+    - to:
+      - ipBlock:
+          cidr: 127.0.0.1/32
+      - ipBlock:
+          cidr: 169.254.169.252/32
+      ports:
+      - protocol: TCP
+        port: 988

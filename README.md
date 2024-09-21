@@ -1,43 +1,24 @@
-# How to apply
+# Flux monorepo demo repository
 
-1. Create your Kubernetes cluster
+# WIP
+
+This is a repository with an example of organizing a monorepo for multiple clusters using [Flux]() tool.
+
+The first version is described in the article [here]() and the repository for it is located [here]()
+
+This is a new version that I want to update constantly.
+
+## Prerequisites
+
+1. Create your Kubernetes cluster (my simple example available [here]())
 2. Clone this repo
-3. Bootstrap flux v2
-
-Here is one of possible ways to simple bootstrap:
-
-install flux cli:
-
-If you creating your own repo (this file contain all CRD's for flux controllers and resources, already exist in this repo):
+3. Bootstrap flux v2:
+```shell
+kubectl apply -f ./components/flux/prod/gotk-components.yaml
 ```
-flux install --export > clusters/ksemele-demo-gke/sync-code/flux-system/gotk-components.yaml
-```
-
-Check your cluster is ready to install flux:
-```
-flux check --pre
-```
-e.g.
-```
-$ flux check --pre
-► checking prerequisites
-✔ Kubernetes 1.25.7-gke.1000 >=1.20.6-0
-✔ prerequisites checks passed
-```
-
-Install flux into your cluster (check your context):
-```
-flux install
-```
-
-Optional: check installation after complete
-```
-flux check
-```
-
 4. Apply flux resource to sync this repo and your cluster
 ```
-kubectl apply -f clusters/ksemele-demo-gke/sync-code/flux-system/gotk-sync.yaml
+kubectl apply -f clusters/cluster-002/sync-code/flux-system/gotk-sync.yaml
 ```
 
 5. Check Weave gitops

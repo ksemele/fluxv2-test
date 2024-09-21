@@ -1,0 +1,24 @@
+---
+# https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/#configuration
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-from-all-to-node-local-dns-cache
+  namespace: <NAMESPACE>
+spec:
+  podSelector: {}
+  egress:
+    - ports:
+        - protocol: UDP
+          port: 53
+      to:
+        - podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+          namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+        - ipBlock:
+            cidr: ${NODE_LOCAL_DNS_CACHE_IP_CIDR:=169.254.0.0/16}
+  policyTypes:
+    - Egress

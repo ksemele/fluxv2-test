@@ -1,0 +1,14 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: akrugliak
+spec:
+  # releaseName: nginx-1
+  targetNamespace: akrugliak
+  storageNamespace: akrugliak
+  chart:
+    spec:
+      version: 18.2.3
+  values:
