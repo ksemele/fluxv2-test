@@ -13,6 +13,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./clusters/cluster-002/custom-resources/weave
+  path: ./clusters/cluster-002/custom-resources/flux-system/weave
   prune: true
   wait: true
