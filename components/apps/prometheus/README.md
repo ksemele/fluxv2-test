@@ -21,7 +21,7 @@
       releaseName: prometheus
       chart:
         spec:
-          version: 52.1.x
+          version: 65.x
       values:
     ```
 
@@ -56,7 +56,6 @@
       interval: 10m0s
       dependsOn:
         - name: repos
-        - name: prometheus-operator-crds
       sourceRef:
         kind: GitRepository
         name: flux-system

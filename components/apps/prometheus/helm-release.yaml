@@ -15,7 +15,7 @@ spec:
     spec:
       # https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus
       chart: kube-prometheus-stack
-      version: 58.x
+      version: 65.x
       sourceRef:
         kind: HelmRepository
         name: prometheus-community

@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: prometheus
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  dependsOn:
+    - name: repos
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./clusters/cluster-002/custom-resources/monitoring/prometheus
+  prune: true
+  wait: true
+  timeout: 5m0s
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-variables
+        # Use this ConfigMap if it exists, but proceed if it doesn't.
+        optional: false
