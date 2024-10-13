@@ -5,7 +5,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 0m10s
   ref:
     branch: feature/tests
   # secretRef:  # if you use private repo - you need to add secret to access to it
