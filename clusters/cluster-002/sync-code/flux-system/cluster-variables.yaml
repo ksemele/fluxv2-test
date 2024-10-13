@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-variables
+  namespace: flux-system
+  labels:
+    generated-by: terraform
+data:
+  KUBE_API_IP_CIDR: "10.1.0.0/24"
+  KUBE_SVC_IP_CIDR: "10.3.0.0/24"
+  KUBE_POD_IP_CIDR: "10.2.0.0/19"
+  KUBE_MASTER_IP_CIDR: "10.1.0.0/24"
+  KUBE_WORKER_IP_CIDR: "10.1.0.0/24"
+  PRIVATE_IP_CIDR: "10.0.0.0/8"
