@@ -6,7 +6,6 @@ resources:
   - ../../../common-template
   - ../../../policy-templates/allow-egress-internet.yaml
   - ../../../policy-templates/allow-ingress-from-cluster-to-all.yaml
-  - allow-egress-from-konnectivity-agent-to-private-network.yaml
   - allow-egress-from-kube-system-to-gcp-specific.yaml
   - allow-egress-from-metrics-server-to-kubelet.yaml
   - allow-ingress-from-all-to-metrics-server.yaml

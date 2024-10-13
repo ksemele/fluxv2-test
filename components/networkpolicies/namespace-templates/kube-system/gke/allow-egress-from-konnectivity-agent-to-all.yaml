@@ -14,17 +14,18 @@ spec:
     - ports:
         - protocol: TCP
           port: 8132
-    - ports:
         - protocol: TCP
           port: 10250
-    - ports:
         - protocol: TCP
           port: 9443
-    - ports:
         - protocol: TCP
           port: 8443
-    - ports:
         - protocol: TCP
           port: 15017
+        - protocol: TCP
+          port: 6443
+      to:
+        - ipBlock:
+            cidr: ${KUBE_POD_IP_CIDR:=10.0.0.0/8}
   policyTypes:
     - Egress
