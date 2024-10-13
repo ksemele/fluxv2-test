@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-from-prometheus-to-kube-proxy
+  namespace: kube-system
+spec:
+  podSelector: {}
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 10249
+      from:
+        - namespaceSelector:
+            matchLabels:
+              k8s-namespace: monitoring
+  policyTypes:
+    - Ingress

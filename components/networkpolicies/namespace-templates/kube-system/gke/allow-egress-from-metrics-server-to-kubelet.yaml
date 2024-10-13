@@ -1,0 +1,19 @@
+---
+# https://github.com/kubernetes-sigs/metrics-server#requirements
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-from-metrics-server-to-kubelet
+  namespace: kube-system
+spec:
+  podSelector:
+    matchLabels:
+      k8s-app: metrics-server
+  egress:
+    - to:
+        - ipBlock:
+            cidr: ${KUBE_MASTER_IP_CIDR:=10.0.0.0/8}
+        - ipBlock:
+            cidr: ${KUBE_WORKER_IP_CIDR:=10.0.0.0/8}
+  policyTypes:
+    - Egress

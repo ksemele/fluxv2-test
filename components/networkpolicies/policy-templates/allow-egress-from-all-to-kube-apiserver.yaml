@@ -1,0 +1,19 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-from-all-to-kube-apiserver
+  namespace: <NAMESPACE>
+spec:
+  podSelector: {}
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 6443
+        - protocol: TCP
+          port: 443
+      to:
+        - ipBlock:
+            cidr: ${KUBE_API_IP_CIDR:=10.0.0.0/8}
+  policyTypes:
+    - Egress

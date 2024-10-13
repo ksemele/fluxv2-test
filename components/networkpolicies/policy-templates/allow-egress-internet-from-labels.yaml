@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-internet-from-labels
+  namespace: <NAMESPACE>
+spec:
+  podSelector:
+    matchLabels:
+      allow: internet
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 80
+        - protocol: TCP
+          port: 443
+  policyTypes:
+    - Egress
