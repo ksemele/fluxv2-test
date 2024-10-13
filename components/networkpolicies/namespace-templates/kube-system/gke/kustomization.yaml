@@ -6,6 +6,7 @@ resources:
   - ../../../common-template
   - ../../../policy-templates/allow-egress-internet.yaml
   - ../../../policy-templates/allow-ingress-from-cluster-to-all.yaml
+  - ../../../policy-templates/allow-egress-from-all-to-private-network.yaml
   - ../allow-ingress-from-all-to-kube-api.yaml
   - ../allow-ingress-from-all-to-kube-dns.yaml
   - ../allow-ingress-from-prometheus-to-kube-dns.yaml
