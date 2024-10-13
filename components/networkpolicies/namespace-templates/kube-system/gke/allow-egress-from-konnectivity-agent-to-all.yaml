@@ -7,15 +7,24 @@ metadata:
   name: allow-egress-from-konnectivity-agent-to-all
   namespace: kube-system
 spec:
-  egress:
-  - ports:
-    - port: 6443
-      protocol: TCP
-    to:
-    - ipBlock:
-        cidr: ${KUBE_POD_IP_CIDR:=10.0.0.0/8}
   podSelector:
     matchLabels:
       k8s-app: konnectivity-agent
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 8132
+    - ports:
+        - protocol: TCP
+          port: 10250
+    - ports:
+        - protocol: TCP
+          port: 9443
+    - ports:
+        - protocol: TCP
+          port: 8443
+    - ports:
+        - protocol: TCP
+          port: 15017
   policyTypes:
-  - Egress
+    - Egress
