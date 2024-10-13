@@ -6,12 +6,10 @@ resources:
   - ../../../common-template
   - ../../../policy-templates/allow-egress-internet.yaml
   - ../../../policy-templates/allow-ingress-from-cluster-to-all.yaml
-  - ../../../policy-templates/allow-egress-from-all-to-private-network.yaml
+  - allow-egress-from-kube-system-to-gcp-specific.yaml
+  - allow-egress-from-metrics-server-to-kubelet.yaml
+  - allow-ingress-from-all-to-metrics-server.yaml
   - ../allow-ingress-from-all-to-kube-api.yaml
   - ../allow-ingress-from-all-to-kube-dns.yaml
   - ../allow-ingress-from-prometheus-to-kube-dns.yaml
   - ../allow-ingress-from-prometheus-to-kube-proxy.yaml
-  - allow-ingress-from-all-to-metrics-server.yaml
-  - allow-egress-from-kube-system-to-gcp-specific.yaml
-  - allow-ingress-from-kube-system.yaml
-  - allow-egress-from-metrics-server-to-kubelet.yaml
