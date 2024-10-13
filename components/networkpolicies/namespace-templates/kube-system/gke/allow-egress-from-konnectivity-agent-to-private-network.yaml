@@ -1,0 +1,21 @@
+---
+# https://cloud.google.com/kubernetes-engine/docs/troubleshooting#konnectivity_proxy
+# https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-from-konnectivity-agent-to-private-network
+  namespace: kube-system
+spec:
+  egress:
+  - ports:
+    - port: 6443
+      protocol: TCP
+    to:
+    - ipBlock:
+        cidr: ${KUBE_POD_IP_CIDR:=10.0.0.0/8}
+  podSelector:
+    matchLabels:
+      k8s-app: konnectivity-agent
+  policyTypes:
+  - Egress
