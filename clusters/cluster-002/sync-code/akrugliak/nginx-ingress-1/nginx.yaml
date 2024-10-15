@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./clusters/cluster-002/custom-resources/akrugliak/nginx-1
+  path: ./clusters/cluster-002/custom-resources/akrugliak/nginx-ingress-1
   prune: true
   wait: true
