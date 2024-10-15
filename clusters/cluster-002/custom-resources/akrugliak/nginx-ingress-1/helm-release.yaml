@@ -6,6 +6,8 @@ metadata:
   namespace: akrugliak
 spec:
   releaseName: nginx-ingress-1
+  targetNamespace: akrugliak
+  storageNamespace: akrugliak
   chart:
     spec:
       version: 1.4.0
