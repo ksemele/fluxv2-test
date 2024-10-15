@@ -5,7 +5,7 @@ metadata:
   name: nginx-ingress
   namespace: akrugliak
 spec:
-  releaseName: nginx-ingress-1
+  # releaseName: nginx-ingress-1
   targetNamespace: akrugliak
   storageNamespace: akrugliak
   chart:

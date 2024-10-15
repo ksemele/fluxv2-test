@@ -5,7 +5,7 @@ metadata:
   name: nginx
   namespace: akrugliak
 spec:
-  releaseName: nginx-1
+  # releaseName: nginx-1
   targetNamespace: akrugliak
   storageNamespace: akrugliak
   chart:
