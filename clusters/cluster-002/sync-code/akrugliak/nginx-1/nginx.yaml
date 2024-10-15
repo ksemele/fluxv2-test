@@ -5,6 +5,15 @@ metadata:
   name: nginx-1
   namespace: akrugliak
 spec:
+  patches:
+  - patch: |
+
+      - op: replace
+        path: /metadata/name
+        value: nginx-1
+      - op: replace
+        path: /spec/releaseName
+        value: nginx-1
   interval: 5m
   retryInterval: 1m
   timeout: 15m
