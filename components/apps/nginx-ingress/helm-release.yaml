@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nginx
+  name: nginx-ingress
   namespace: flux-system
 spec:
   interval: 0m10s
@@ -10,10 +10,10 @@ spec:
   storageNamespace: <NAMESPACE>
   chart:
     spec:
-      chart: nginx
-      version: 18.2.3
+      chart: nginx-ingress
+      version: 1.4.0
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: nginx-stable
         namespace: flux-system
       interval: 5m0s
