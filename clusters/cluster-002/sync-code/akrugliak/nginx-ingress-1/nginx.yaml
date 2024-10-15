@@ -14,6 +14,9 @@ spec:
       - op: replace
         path: /spec/releaseName
         value: nginx-ingress-1
+    target:
+      kind: HelmRelease
+      name: nginx-ingress
   interval: 5m
   retryInterval: 1m
   timeout: 15m
