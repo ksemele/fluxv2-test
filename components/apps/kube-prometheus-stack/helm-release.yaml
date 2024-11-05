@@ -1,0 +1,111 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: kube-prometheus-stack
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  driftDetection:
+    mode: enabled
+    ignore:
+      # Ignore "validated" annotation which is not inserted during install
+      - paths: ["/metadata/annotations/prometheus-operator-validated"]
+        target:
+          kind: PrometheusRule
+  valuesFrom:
+  - kind: ConfigMap
+    name: flux-kube-state-metrics-config
+    valuesKey: flux-kube-state-metrics-config.yaml
+  # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+  values:
+    ## Create default rules for monitoring the cluster
+    ##
+    defaultRules:
+      create: true
+      disabled:
+        InfoInhibitor: true
+        # KubeAPIDown: true
+        # NodeRAIDDegraded: true
+        ## no alertmanager is created, external cluster is used
+    alertmanager:
+      enabled: false
+
+    grafana:
+      enabled: false
+
+    kubelet:
+      namespace: kube-system
+
+    ## kube-dns is monitored in gke clusters only
+    kubeDns:
+      service:
+        selector:
+          k8s-app: kube-dns
+
+    ## Manages Prometheus and Alertmanager components
+    ##
+    prometheusOperator:
+
+      ## Define which Nodes the Pods are scheduled on.
+      ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+      nodeSelector: {}
+
+      ## Admission webhook support for PrometheusRules resources added in Prometheus Operator 0.30 can be enabled to prevent incorrectly formatted
+      ## rules from making their way into prometheus and potentially preventing the container from starting
+      admissionWebhooks:
+        enabled: false
+
+      ## Prometheus-Operator v0.39.0 and later support TLS natively.
+      ##
+      tls:
+        enabled: false
+
+    ## Deploy a Prometheus instance
+    ##
+    prometheus:
+
+      ## Configuration for Prometheus service
+      ##
+      service:
+        annotations:
+          cloud.google.com/load-balancer-type: Internal
+          networking.gke.io/internal-load-balancer-allow-global-access: "true"
+        type: LoadBalancer
+
+      prometheusSpec:
+        retention: 24h
+
+        podMonitorNamespaceSelector: {}
+        podMonitorSelector:
+          matchLabels:
+            app.kubernetes.io/component: monitoring
+
+        ## If true, a nil or {} value for prometheus.prometheusSpec.ruleSelector will cause the
+        ## prometheus resource to be created with selectors based on values in the helm deployment,
+        ## which will also match the PrometheusRule resources created
+        ##
+        ruleSelectorNilUsesHelmValues: false
+
+        ## PrometheusRules to be selected for target discovery.
+        ## If {}, select all PrometheusRules
+        ##
+        ruleSelector:
+          matchLabels:
+            release: prometheus
+
+        ## If true, a nil or {} value for prometheus.prometheusSpec.serviceMonitorSelector will cause the
+        ## prometheus resource to be created with selectors based on values in the helm deployment,
+        ## which will also match the servicemonitors created
+        ##
+        serviceMonitorSelectorNilUsesHelmValues: false
+
+        serviceMonitorSelector:
+          matchLabels:
+            release: prometheus

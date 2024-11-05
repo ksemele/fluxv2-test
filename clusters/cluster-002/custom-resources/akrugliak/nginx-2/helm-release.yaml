@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: akrugliak
+spec:
+  targetNamespace: akrugliak
+  storageNamespace: akrugliak
+  chart:
+    spec:
+      version: 18.2.3
+  values:
+    staticSiteConfigmap: nginx-2
+    serverBlock: |-
+      server {
+          listen 8080;
+          server_name example.com;
+
+          location / {
+              root /app;
+              index index.html;
+              try_files $uri $uri/ /index.html =404;
+          }
+
+          location /healthz {
+              return 200 'OK';
+              add_header Content-Type text/plain;
+          }
+      }

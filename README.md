@@ -1,55 +1,41 @@
-# How to apply
+# Flux monorepo demo repository
 
-1. Create your Kubernetes cluster
+This is a repository with an example of organizing a monorepo for multiple clusters using [FluxCD](https://github.com/fluxcd/flux2) tool.
+
+The first version is described in the article [here](https://medium.com/@ksemele/flux-v2-monorepo-experience-2973cd501fdd) and the repository for it is located [here](https://github.com/ksemele/flux-monorepo)
+
+This is a new version that I want to update constantly.
+
+## Prerequisites
+
+1. Create your Kubernetes cluster (my simple example for GKE available [here](https://github.com/ksemele/tf-gke-test), kind or minikube will work too)
 2. Clone this repo
-3. Bootstrap flux v2
+3. Bootstrap flux v2:
 
-Here is one of possible ways to simple bootstrap:
-
-install flux cli:
-
-If you creating your own repo (this file contain all CRD's for flux controllers and resources, already exist in this repo):
-```
-flux install --export > clusters/ksemele-demo-gke/sync-code/flux-system/gotk-components.yaml
-```
-
-Check your cluster is ready to install flux:
-```
-flux check --pre
-```
-e.g.
-```
-$ flux check --pre
-► checking prerequisites
-✔ Kubernetes 1.25.7-gke.1000 >=1.20.6-0
-✔ prerequisites checks passed
-```
-
-Install flux into your cluster (check your context):
-```
-flux install
-```
-
-Optional: check installation after complete
-```
-flux check
+```shell
+kubectl apply -f ./components/flux/prod/gotk-components.yaml
 ```
 
 4. Apply flux resource to sync this repo and your cluster
-```
-kubectl apply -f clusters/ksemele-demo-gke/sync-code/flux-system/gotk-sync.yaml
+
+```shell
+kubectl apply -f clusters/cluster-002/sync-code/flux-system/gotk-sync.yaml
 ```
 
 5. Check Weave gitops
+
 forward port
-```
+
+```shell
 kubectl -n flux-system port-forward svc/weave-gitops 9001:9001
 ```
-login on http://localhost:9001
+
+login on `http://localhost:9001`
 
 use `admin:admin`
 
 6. Uninstall flux
-```
+
+```shell
 flux uninstall
 ```

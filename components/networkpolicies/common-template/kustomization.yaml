@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - ../policy-templates/allow-egress-from-all-to-kube-apiserver.yaml
+  - ../policy-templates/allow-egress-from-all-to-kube-dns.yaml
+  - ../policy-templates/allow-ingress-from-prometheus-to-all.yaml
+  - ../policy-templates/allow-namespace.yaml
+  - ../policy-templates/deny-all-egress.yaml
+  - ../policy-templates/deny-all-ingress.yaml
+  - ../policy-templates/allow-ingress-from-gcp-hc-to-all.yaml
+  - ../policy-templates/allow-egress-from-all-to-gcp-metadata.yaml

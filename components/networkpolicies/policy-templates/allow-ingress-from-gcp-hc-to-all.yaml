@@ -1,0 +1,22 @@
+# This rule is required for native GKE ingresses that do not use NEGs
+# https://cloud.google.com/load-balancing/docs/https
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-ingress-from-gcp-hc-to-all
+  namespace: <NAMESPACE>
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 35.191.0.0/16
+    - ipBlock:
+        cidr: 130.211.0.0/22
+    - ipBlock:
+        cidr: 209.85.152.0/22
+    - ipBlock:
+        cidr: 209.85.204.0/22

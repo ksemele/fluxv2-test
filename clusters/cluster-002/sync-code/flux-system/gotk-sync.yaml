@@ -1,0 +1,26 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 0m10s
+  ref:
+    branch: master
+#  secretRef:  # if you use private repo - you need to add secret to access to it
+#    name: flux-git-auth
+  url: https://github.com/ksemele/fluxv2-test.git
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./clusters/cluster-002/sync-code
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
