@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 0m10s
   ref:
-    branch: feature/tests
+    branch: master
   # secretRef:  # if you use private repo - you need to add secret to access to it
     # name: flux-git-auth
   url: https://github.com/ksemele/fluxv2-test.git
