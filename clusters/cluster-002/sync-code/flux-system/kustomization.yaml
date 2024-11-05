@@ -7,3 +7,4 @@ resources:
   - gotk-sync.yaml
   - repos.yaml
   - weave.yaml
+  - networkpolicies.yaml
