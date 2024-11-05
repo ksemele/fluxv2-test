@@ -5,7 +5,7 @@ metadata:
   name: prometheus
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 0m10s
   dependsOn:
     - name: repos
   sourceRef:
@@ -14,7 +14,7 @@ spec:
   path: ./clusters/cluster-002/custom-resources/monitoring/prometheus
   prune: true
   wait: true
-  timeout: 5m0s
+  timeout: 1m0s
   postBuild:
     substituteFrom:
       - kind: ConfigMap
