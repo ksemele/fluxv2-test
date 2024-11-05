@@ -2,11 +2,7 @@
 
 1. Create `monitoring` namespace.
 
-2. Install `prometheus-operator-crds`
-
-    [How to install](../prometheus-operator-crds/README.md)
-
-3. Add files to `custom-resources`:
+2. Add files to `custom-resources`:
 
     ```yaml
     clusters/<CLUSTER>/custom-resources/monitoring/prometheus/helm-release.yaml
@@ -41,7 +37,7 @@
           kind: HelmRelease
     ```
 
-4. Connect to `sync-code`:
+3. Connect to `sync-code`:
 
     ```yaml
     clusters/<CLUSTER>/sync-code/monitoring/prometheus.yaml
