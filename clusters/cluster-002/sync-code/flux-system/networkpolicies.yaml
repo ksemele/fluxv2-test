@@ -6,7 +6,7 @@ metadata:
   name: networkpolicies-flux-system
   namespace: flux-system
 spec:
-  interval: 5m0s
+  interval: 0m10s
   targetNamespace: flux-system
   sourceRef:
     kind: GitRepository
@@ -14,7 +14,7 @@ spec:
   path: ./clusters/cluster-002/custom-resources/flux-system/networkpolicies
   prune: true
   wait: true
-  timeout: 20m0s
+  timeout: 2m0s
   postBuild:
     substituteFrom:
       - kind: ConfigMap
