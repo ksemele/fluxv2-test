@@ -9,4 +9,3 @@ spec:
   chart:
     spec:
       version: 65.x
-  values:
